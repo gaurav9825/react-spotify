@@ -1,25 +1,24 @@
-import AlbumList from "./component";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchArtistSongs } from '../../actions/artistActions';
-import { updateHeaderTitle } from '../../actions/uiActions';
+import AlbumList from './component'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchArtistSongs } from '../../actions/artistActions'
+import { updateHeaderTitle } from '../../actions/uiActions'
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = state => {
   return {
-    token: state.tokenReducer.token ? state.tokenReducer.token : '',
-    artists: state.artistsReducer.artistList ? state.artistsReducer.artistList.artists : ''
-  };
+    token: state.token.token ? state.token.token : '',
+    artists: state.artists.artistList ? state.artists.artistList.artists : ''
+  }
+}
 
-};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      fetchArtistSongs,
+      updateHeaderTitle
+    },
+    dispatch
+  )
+}
 
-const mapDispatchToProps = (dispatch) => {
-
-  return bindActionCreators({
-    fetchArtistSongs,
-    updateHeaderTitle
-  }, dispatch);
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AlbumList);
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumList)

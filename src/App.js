@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { fetchUser } from "./actions/userActions";
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { fetchUser } from './actions/userActions'
 
 import {
   playSong,
@@ -9,79 +9,79 @@ import {
   pauseSong,
   fetchSongs,
   resumeSong
-} from "./actions/songActions";
-import "./App.css";
+} from './actions/songActions'
+import './App.css'
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import UserPlaylists from "./components/UserPlaylists";
-import MainView from "./components/MainView";
-import MainHeader from "./components/MainHeader";
-import SideMenu from "./components/SideMenu";
+import Header from './components/Header'
+import Footer from './components/Footer'
+import UserPlaylists from './components/UserPlaylists'
+import MainView from './components/MainView'
+import MainHeader from './components/MainHeader'
+import SideMenu from './components/SideMenu'
 
 class App extends Component {
-  static audio;
+  static audio
 
-  componentDidMount() {
-    this.props.fetchUser(this.props.token);
-    this.props.fetchSongs();
+  componentDidMount () {
+    this.props.fetchUser(this.props.token)
+    this.props.fetchSongs()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.audio !== undefined) {
-      this.audio.volume = nextProps.volume / 100;
+      this.audio.volume = nextProps.volume / 100
     }
   }
 
   stopSong = () => {
     if (this.audio) {
-      this.props.stopSong();
-      this.audio.pause();
+      this.props.stopSong()
+      this.audio.pause()
     }
-  };
+  }
 
   pauseSong = () => {
     if (this.audio) {
-      this.props.pauseSong();
-      this.audio.pause();
+      this.props.pauseSong()
+      this.audio.pause()
     }
-  };
+  }
 
   resumeSong = () => {
     if (this.audio) {
-      this.props.resumeSong();
-      this.audio.play();
+      this.props.resumeSong()
+      this.audio.play()
     }
-  };
+  }
 
   audioControl = song => {
-    const { playSong, stopSong } = this.props;
+    const { playSong, stopSong } = this.props
 
     if (this.audio === undefined) {
-      playSong(song.track);
-      this.audio = new Audio(song.track.preview_url);
-      this.audio.play();
+      playSong(song.track)
+      this.audio = new Audio(song.track.preview_url)
+      this.audio.play()
     } else {
-      stopSong();
-      this.audio.pause();
-      playSong(song.track);
-      this.audio = new Audio(song.track.preview_url);
-      this.audio.play();
+      stopSong()
+      this.audio.pause()
+      playSong(song.track)
+      this.audio = new Audio(song.track.preview_url)
+      this.audio.play()
     }
-  };
+  }
 
-  render() {
+  render () {
     return (
-      <div className="App">
-        <div className="app-container">
-          <div className="left-side-section">
+      <div className='App'>
+        <div className='app-container'>
+          <div className='left-side-section'>
             <SideMenu />
             <UserPlaylists />
           </div>
 
-          <div className="main-section">
+          <div className='main-section'>
             <Header />
-            <div className="main-section-container">
+            <div className='main-section-container'>
               <MainHeader
                 pauseSong={this.pauseSong}
                 resumeSong={this.resumeSong}
@@ -102,16 +102,16 @@ class App extends Component {
           />
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    token: state.tokenReducer.token,
-    volume: state.soundReducer.volume
-  };
-};
+    token: state.token.token,
+    volume: state.sound.volume
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -124,10 +124,7 @@ const mapDispatchToProps = dispatch => {
       fetchSongs
     },
     dispatch
-  );
-};
+  )
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

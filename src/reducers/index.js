@@ -1,22 +1,22 @@
-import { combineReducers } from "redux";
-import userReducer from './userReducer';
-import tokenReducer from './tokenReducer';
-import playlistReducer from './playlistReducer';
-import songsReducer from './songsReducer';
-import albumsReducer from './albumsReducer';
-import artistsReducer from './artistsReducer';
-import uiReducer from './uiReducer';
-import browseReducer from './browseReducer';
-import soundReducer from './soundReducer';
+import { combineReducers } from 'redux'
+import user from './user'
+import token from './token'
+import playlist from './playlist'
+import songs from './songs'
+import albums from './albums'
+import artists from './artists'
+import ui from './ui'
+import browse from './browse'
+import sound from './sound'
 
 export default combineReducers({
-  userReducer,
-  tokenReducer,
-  playlistReducer,
-  songsReducer,
-  albumsReducer,
-  artistsReducer,
-  uiReducer,
-  browseReducer,
-  soundReducer
-});
+  user,
+  token,
+  playlist,
+  songs,
+  albums,
+  artists,
+  ui,
+  browse,
+  sound
+})

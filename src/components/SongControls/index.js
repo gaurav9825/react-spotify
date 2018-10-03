@@ -1,26 +1,24 @@
-import SongControls from "./component";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { increaseSongTime } from "../../actions/songActions";
+import SongControls from './component'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { increaseSongTime } from '../../actions/songActions'
 
 const mapStateToProps = state => {
   return {
-    songName: state.songsReducer.songDetails
-      ? state.songsReducer.songDetails.name
-      : "",
-    artistName: state.songsReducer.songDetails
-      ? state.songsReducer.songDetails.artists[0].name
-      : "",
-    songPlaying: state.songsReducer.songPlaying,
-    timeElapsed: state.songsReducer.timeElapsed,
-    songPaused: state.songsReducer.songPaused,
-    songDetails: state.songsReducer.songDetails,
-    songs: state.songsReducer.songs,
-    albumImage: state.songsReducer.songDetails
-      ? state.songsReducer.songDetails.album.images[0].url
-      : ""
-  };
-};
+    songName: state.songs.songDetails ? state.songs.songDetails.name : '',
+    artistName: state.songs.songDetails
+      ? state.songs.songDetails.artists[0].name
+      : '',
+    songPlaying: state.songs.songPlaying,
+    timeElapsed: state.songs.timeElapsed,
+    songPaused: state.songs.songPaused,
+    songDetails: state.songs.songDetails,
+    songs: state.songs.songs,
+    albumImage: state.songs.songDetails
+      ? state.songs.songDetails.album.images[0].url
+      : ''
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
@@ -28,10 +26,7 @@ const mapDispatchToProps = dispatch => {
       increaseSongTime
     },
     dispatch
-  );
-};
+  )
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SongControls);
+export default connect(mapStateToProps, mapDispatchToProps)(SongControls)
